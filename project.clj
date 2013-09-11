@@ -4,6 +4,7 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [compojure "1.1.5"]
                  [hiccup "1.0.4"]
+                 [hiccup-bootstrap "0.1.2"]
                  [korma "0.3.0-RC5"]
                  [sqlitejdbc "0.5.6"]]
   :plugins [[lein-ring "0.8.5"]]

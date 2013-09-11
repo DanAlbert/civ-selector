@@ -2,6 +2,7 @@
   (:use compojure.core)
   (:use ring.middleware.reload)
   (:use ring.middleware.stacktrace)
+  (:use hiccup.bootstrap.middleware)
   (:use civ-selector.middleware)
   (:use civ-selector.views)
   (:require [compojure.handler :as handler]
@@ -14,6 +15,7 @@
 
 (def app
   (-> (handler/site app-routes)
+      (wrap-bootstrap-resources)
       (wrap-request-logging)
       (wrap-reload `[civ-selector.handler civ-selector.views civ-selector.db])
       (wrap-stacktrace)))
