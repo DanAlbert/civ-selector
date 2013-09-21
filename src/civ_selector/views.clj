@@ -7,11 +7,12 @@
   (:use civ-selector.middleware))
 
 (defn view-layout [title & content]
-  (html5
+  (html5 {:lang "en"}
     [:head
      [:title title]
      (include-bootstrap)
-     (include-css "/css/default.css")]
+     (include-css "/css/default.css")
+     (include-js "http://code.jquery.com/jquery-2.0.3.min.js")]
     [:body
      [:div.navbar.navbar-inverse.navbar-fixed-top
       [:div.navbar-inner
@@ -19,10 +20,33 @@
         [:a.brand {:href "/"} "civ-selector"]]]]
      [:div.container content]]))
 
+(def available-civs
+  ["USA"
+   "Netherlands"
+   "Russia"])
+
+(def civ-selector-form
+  [:form#available-civs {:action "#"}
+   [:fieldset
+    [:legend "Civ Selector"]
+    [:label "Select from"]
+    (for [civ available-civs]
+      [:label.checkbox
+       [:input {:type "checkbox" :name civ :checked "checked"} civ]])
+    [:button.btn {:type="submit"} "Submit"]]])
+
 (defn main-page []
   (view-layout "Civ Selector"
-    [:h1 "Civ Selector"]))
+               civ-selector-form
+               [:p#selection-result]
+               (include-js "/js/civ-selector.js")))
+
+(defn select-civ [select-from]
+  (str (rand-nth select-from)))
 
 (defn not-found-page []
   (view-layout "Civ Selector - Not Found"
-    [:h1 "Page not found"]))
+               [:h1 "Page not found"]))
+
+(defn map-tag [tag xs]
+  (map (fn [x] [tag x]) xs))

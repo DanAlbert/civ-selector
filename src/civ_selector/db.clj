@@ -5,4 +5,4 @@
        (sqlite3 {:db "civ-selevtor.db"}))
 
 (defentity civ
-  (entity-fields :id :name))
+  (entity-fields :name :leader))
