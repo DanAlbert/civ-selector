@@ -6,7 +6,8 @@
   (:use hiccup.bootstrap.middleware)
   (:use civ-selector.middleware)
   (:use civ-selector.views)
-  (:require [compojure.handler :as handler]
+  (:require [ring.adapter.jetty :as ring]
+            [compojure.handler :as handler]
             [compojure.route :as route]))
 
 (defroutes app-routes
@@ -24,3 +25,10 @@
       (wrap-request-logging)
       (wrap-reload `[civ-selector.handler civ-selector.views civ-selector.db])
       (wrap-stacktrace)))
+
+(defn start [port]
+  (ring/run-jetty (var app) {:port (or port 8080) :join? false}))
+
+(defn -main []
+  (let [port (Integer/parseInt (System/getenv "PORT"))]
+    (start port)))
