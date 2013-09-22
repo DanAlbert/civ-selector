@@ -1,8 +1,13 @@
 (ns civ-selector.db
-  (:use [korma core db]))
+  (:require [monger.core :as mg]
+            [monger.collection :as mc])
+  (:import [com.mongodb MongoOptions ServerAddress]))
 
-(defdb dev
-       (sqlite3 {:db "civ-selevtor.db"}))
+(mg/connect-via-uri! (System/getenv "MONGOHQ_URL"))
+(mg/use-db! (System/getenv "DB_NAME"))
 
-(defentity civ
-  (entity-fields :name :leader))
+(defn get-civs [& query-opts]
+  (mc/find-maps "civilizations" query-opts))
+
+(defn add-civ [civ]
+  (mc/insert "civilizations" civ))

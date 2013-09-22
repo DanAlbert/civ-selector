@@ -7,7 +7,7 @@
                  [compojure "1.1.5"]
                  [hiccup "1.0.4"]
                  [hiccup-bootstrap "0.1.2"]
-                 [korma "0.3.0-RC5"]
+                 [com.novemberain/monger "1.5.0"]
                  [sqlitejdbc "0.5.6"]]
   :plugins [[lein-ring "0.8.7"]]
   :ring {:handler civ-selector.handler/app}
