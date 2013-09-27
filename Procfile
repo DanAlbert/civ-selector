@@ -1,1 +1,1 @@
-web: lein run -m civ-selector.handler
+web: java $JVM_OPTS -cp target/civ-selector.jar clojure.main -m civ-selector.handler

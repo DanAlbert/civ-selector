@@ -11,5 +11,6 @@
                  [sqlitejdbc "0.5.6"]]
   :plugins [[lein-ring "0.8.7"]]
   :ring {:handler civ-selector.handler/app}
-  :profiles
-  {:dev {:dependencies [[ring-mock "0.1.5"]]}})
+  :uberjar-name "civ-selector.jar"
+  :profiles {:dev {:dependencies [[ring-mock "0.1.5"]]}
+             :uberjar {:main civ-selector.handler, :aot :all}})
