@@ -8,7 +8,8 @@
   (:use civ-selector.views)
   (:require [ring.adapter.jetty :as ring]
             [compojure.handler :as handler]
-            [compojure.route :as route]))
+            [compojure.route :as route])
+  (:gen-class))
 
 (defroutes app-routes
   (GET "/" [] (main-page))
