@@ -2,6 +2,7 @@
   (:use compojure.core)
   (:use [hiccup core page])
   (:use hiccup.bootstrap.page)
+  (:use [korma core db])
   (:use civ-selector.db)
   (:use civ-selector.middleware))
 
@@ -29,11 +30,9 @@
    [:fieldset
     [:legend "Civ Selector"]
     [:label "Select from"]
-    (for [civ (get-civs)]
+    (for [civ available-civs]
       [:label.checkbox
-       [:input {:type "checkbox"
-                :name (:name civ)
-                :checked "checked"} (:name civ)]])
+       [:input {:type "checkbox" :name civ :checked "checked"} civ]])
     [:button.btn {:type="submit"} "Submit"]]])
 
 (defn main-page []
